@@ -8,6 +8,22 @@ const app = createApp({
         key: 'dingwei',
         value: 0,
       },
+      keyword: '',
+      typeList: {
+        zonghe: [
+          { name: '本周免费', value: 10 },
+          { name: '新手推荐', value: 11 },
+        ],
+        dingwei: [
+          { name: '全部', value: 0 },
+          { name: '坦克', value: 3 },
+          { name: '战士', value: 1 },
+          { name: '法师', value: 2 },
+          { name: '刺客', value: 4 },
+          { name: '射手', value: 5 },
+          { name: '辅助', value: 6 },
+        ],
+      },
     }
   },
   methods: {
@@ -27,6 +43,11 @@ const app = createApp({
     },
     changeType(key, value) {
       ;((this.query.key = key), (this.query.value = value))
+      this.keyword = ''
+    },
+    changeKeyword(e) {
+      this.keyword = e.target.value
+      this.query.value = 0
     },
   },
   mounted() {
@@ -36,16 +57,28 @@ const app = createApp({
     //定义计算属性,根据参与条件过滤出英雄信息
     fillterHeroList() {
       const { key, value } = this.query
-      if (key == 'zonghe') {
-        return this.heroList.filter((item) => item.pay_type === value)
-      } else if (key == 'dingwei') {
-        if (value == 0) {
-          return this.heroList
-        } else {
-          return this.heroList.filter(
-            (item) => item.hero_type === value || item.hero_type2 === value,
-          )
+      const keyword = this.keyword
+      if (keyword == '') {
+        if (key == 'zonghe') {
+          return this.heroList.filter((item) => item.pay_type === value)
+        } else if (key == 'dingwei') {
+          if (value == 0) {
+            return this.heroList
+          } else {
+            return this.heroList.filter(
+              (item) => item.hero_type === value || item.hero_type2 === value,
+            )
+          }
         }
+      } else {
+        const res = this.heroList.filter((item) => item.cname.includes(keyword))
+        return res.map((item) => ({
+          ...item,
+          cname: item.cname.replace(
+            keyword,
+            `<span style='color:red'>${keyword}</span>`,
+          ),
+        }))
       }
     },
   },

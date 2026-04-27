@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = [
+        {
+          id: 1,
+          name: '张三',
+        },
+        {
+          id: 3,
+          name: '李四',
+        },
+        {
+          id: 3,
+          name: '王五',
+        },
+      ]
+
+      const newArr = arr.map((item) => {
+        return {
+          ...item,
+          age: 18,
+        }
+      })
+      console.log(newArr)
+
+      const newArr2 = arr.map((item) => {
+        return {
+          ...item,
+          name:item.name+'的年龄是18岁'
+        }
+      })
+       console.log(newArr2)
+    </script>
+  </body>
+</html>

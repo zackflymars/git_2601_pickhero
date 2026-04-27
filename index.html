@@ -18,93 +18,39 @@
             <p>定位</p>
           </div>
           <div class="types">
-            <div class="type-list">
+            <div class="type-list" v-for="(value,key) in typeList">
               <div
                 class="radio"
-                @click="changeType('zonghe',10)"
-                :class="{checked:query.value===10}"
+                v-for="item in value"
+                @click="changeType(key,item.value)"
+                :class="{checked:query.value===item.value}"
               >
-                本周免费
-              </div>
-              <div
-                class="radio"
-                @click="changeType('zonghe',11)"
-                :class="{checked:query.value===11}"
-              >
-                新手推荐
-              </div>
-            </div>
-            <div class="type-list">
-              <div
-                class="radio"
-                @click="changeType('dingwei',0)"
-                :class="{checked:query.value===0}"
-              >
-                全部
-              </div>
-              <div
-                class="radio"
-                @click="changeType('dingwei',3)"
-                :class="{checked:query.value===3}"
-              >
-                坦克
-              </div>
-              <div
-                class="radio"
-                @click="changeType('dingwei',1)"
-                :class="{checked:query.value===1}"
-              >
-                战士
-              </div>
-              <div
-                class="radio"
-                @click="changeType('dingwei',4)"
-                :class="{checked:query.value===4}"
-              >
-                刺客
-              </div>
-              <div
-                class="radio"
-                @click="changeType('dingwei',2)"
-                :class="{checked:query.value===2}"
-              >
-                法师
-              </div>
-              <div
-                class="radio"
-                @click="changeType('dingwei',5)"
-                :class="{checked:query.value===5}"
-              >
-                射手
-              </div>
-              <div
-                class="radio"
-                @click="changeType('dingwei',6)"
-                :class="{checked:query.value===6}"
-              >
-                辅助
+                {{item.name}}
               </div>
             </div>
           </div>
           <div class="keyword">
             <div class="input">
-              <input type="text" placeholder="请输入你要搜索的英雄名" />
+              <input
+                type="text"
+                placeholder="请输入你要搜索的英雄名"
+                :value="keyword"
+                @input="changeKeyword"
+              />
             </div>
           </div>
         </div>
-
         <!-- 下面列表展示部分 -->
         <ul class="list">
           <li v-for="hero in fillterHeroList" :key="hero.id_name">
             <a :href="getHeroDetail(hero.ename)" target="_blank">
               <img :src="getHeroImage(hero.ename)" />
-              <span>{{hero.cname}}</span>
+              <span v-html="hero.cname"></span>
             </a>
           </li>
         </ul>
       </div>
     </div>
-
     <script src="./src/js/index.js"></script>
   </body>
 </html>
