@@ -25,7 +25,7 @@ body {
   cursor: pointer;
 }
 .radio::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   top: 50%;
@@ -36,7 +36,7 @@ body {
   border-radius: 50%;
 }
 .radio::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 4px;
   top: 50%;
@@ -113,13 +113,13 @@ body {
   font-size: 12px;
 }
 .search .keyword .input::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   right: 0;
   width: 40px;
   height: 20px;
-  background: url("./search_icon.png") no-repeat center;
+  background: url('./search_icon.png') no-repeat center;
   border-left: 1px solid #ccc;
   transform: translateY(-50%);
 }
